@@ -114,6 +114,38 @@ class LinkedList:
             prev = current 
             current = next
         self.head = prev
+        
+    def make_a_loop(self, node_data):
+        itr = self.head
+        
+        while(itr.next is not None):
+            itr = itr.next
+        
+        to_connect = self.head
+        
+        while(to_connect):
+            if(to_connect.data == node_data):
+                break
+            to_connect = to_connect.next
+            
+        itr.next = to_connect
+    
+    def detect_loop(self):
+        
+        a = []
+        itr = self.head
+        while(itr):
+            
+            if(itr.data in a):
+                print('A loop exits')
+                return
+            else:
+                a.append(itr.data)
+            
+            itr = itr.next
+            
+        print('No loop exits')
+        return
             
 
         
@@ -129,7 +161,9 @@ ll.insert_after(2,3)
 ll.insert_before(5,4)
 ll.delete_node(6)
 #ll.push(10)
+#ll.rotate()
 ll.print_it()
 #ll.is_palindrome()
-
+ll.make_a_loop(2)
+ll.detect_loop()
 
