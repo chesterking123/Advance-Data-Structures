@@ -88,6 +88,32 @@ class LinkedList:
             itr = itr.next 
         
         itr.next = to_connect
+        
+    def is_palindrome(self):
+        itr = self.head
+        lis = []
+        
+        while(itr):
+            lis.append(itr.data)
+            itr = itr.next
+            
+        check = (lis == lis[::-1])
+        
+        if(check is True):
+            print("It is a palindrome")
+        
+        else:
+            print('Not a palindrome')
+        
+    def rotate(self): 
+        prev = None
+        current = self.head 
+        while(current is not None): 
+            next = current.next
+            current.next = prev 
+            prev = current 
+            current = next
+        self.head = prev
             
 
         
@@ -97,10 +123,13 @@ ll.append(1)
 ll.append(2)
 ll.append(5)
 ll.append(6)
+#ll.append(2)
+#ll.append(1)
 ll.insert_after(2,3)
 ll.insert_before(5,4)
 ll.delete_node(6)
 #ll.push(10)
 ll.print_it()
+#ll.is_palindrome()
 
 
