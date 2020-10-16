@@ -127,7 +127,16 @@ class BinarySearchTree:
                 if(node.right is not None):
                     q.append(node.right)
             return(counter)
-        
+       
+        def mirror(root):
+            # Code here
+            if (root == None): 
+                return
+            else: 
+                mirror(root.left)  
+                mirror(root.right)  
+                root.left,root.right = root.right,root.left 
+
 
             
 bb = BinarySearchTree()
