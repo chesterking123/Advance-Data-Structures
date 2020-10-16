@@ -112,7 +112,21 @@ class BinarySearchTree:
         print(stack)
 
             
-
+       def countLeaves(root):
+            if(root is None):
+                return
+            q = deque()
+            q.append(root)
+            counter = 0
+            while(len(q)>0):
+                node= q.popleft()
+                if(node.left is None and node.right is None):
+                    counter = counter+1
+                if(node.left is not None):
+                    q.append(node.left)
+                if(node.right is not None):
+                    q.append(node.right)
+            return(counter)
         
 
             
