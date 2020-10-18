@@ -181,15 +181,30 @@ def Checkif2treeMirror(a, b):
         return True
     if a is None or b is None: 
         return False 
-    return (a.data == b.data and 
-            areMirror(a.left, b.right) and 
-            areMirror(a.right , b.left)) 
+    return (a.data == b.data and areMirror(a.left, b.right) and areMirror(a.right , b.left)) 
 
-def is_symmetric(root1 , root2): 
-    if root1 is None and root2 is None: 
-        return True 
-    if (root1 is not None and root2 is not None): 
-            if  root1.key == root2.key: 
-                return (isMirror(root1.left, root2.right)and
-                isMirror(root1.right, root2.left)) 
-    return False
+def isSymmetric( root) : #if a tree is a mirror of itself 
+    q = []      
+    q.append(root)  
+    q.append(root)   
+    leftNode = 0
+    rightNode = 0
+    while(not len(q)):  
+        leftNode = q[0]  
+        q.pop(0)  
+        rightNode = q[0]  
+        q.pop(0)   
+        if(leftNode.data != rightNode.data): 
+            return False
+        if(leftNode.left and rightNode.right) : 
+            q.append(leftNode.left)  
+            q.append(rightNode.right)  .  
+        elif (leftNode.left or rightNode.right) : 
+            return False
+        if(leftNode.right and rightNode.left):  
+            q.append(leftNode.right)  
+            q.append(rightNode.left)  
+        elif(leftNode.right or rightNode.left): 
+            return False
+      
+    return True
