@@ -127,17 +127,8 @@ class BinarySearchTree:
                 if(node.right is not None):
                     q.append(node.right)
             return(counter)
-       
-        def mirror(root):
-            # Code here
-            if (root == None): 
-                return
-            else: 
-                mirror(root.left)  
-                mirror(root.right)  
-                root.left,root.right = root.right,root.left 
-
-
+ 
+                
             
 bb = BinarySearchTree()
 bb.insert(4)
@@ -150,22 +141,55 @@ bb.insert(7)
 
 
 
-# bb.inorder(bb.root)
-# print('\n')
-# bb.preorder(bb.root)
-# print('\n')
-# bb.postorder(bb.root)
-# print('\n')
-# bb.height(bb.root)
-# print(bb.check_node(7,bb.root))
-# bb.print_inrange(2,5,bb.root)
-# print('\n')
-# bb.level_order()
+def inOrder_itr(root): 
+    current = root  
+    stack = [] # initialize stack 
+    done = 0 
+    while True:          
+        if current is not None: 
+            stack.append(current) 
+            current = current.left  
+        elif(stack): 
+            current = stack.pop() 
+            print(current.data, end=" ") 
+            current = current.right   
+        else: 
+            break
 
+def iterativePreorder(root):  
+    nodeStack = [] 
+    nodeStack.append(root) 
+    while(len(nodeStack) > 0): 
+        node = nodeStack.pop() 
+        print node.data, 
+        if node.right is not None: 
+            nodeStack.append(node.right) 
+        if node.left is not None: 
+            nodeStack.append(node.left)
+            
+def mirror(root):
+    # Code here
+    if (root == None): 
+        return
+    else: 
+        mirror(root.left)  
+        mirror(root.right)  
+        root.left,root.right = root.right,root.left 
 
-## To do list:-
-#def is_cousin(self,a,b):
-#is mirror
-#sumofnodes equeals k
+def Checkif2treeMirror(a, b): 
+    if a is None and b is None: 
+        return True
+    if a is None or b is None: 
+        return False 
+    return (a.data == b.data and 
+            areMirror(a.left, b.right) and 
+            areMirror(a.right , b.left)) 
 
-bb.top_view()
+def is_symmetric(root1 , root2): 
+    if root1 is None and root2 is None: 
+        return True 
+    if (root1 is not None and root2 is not None): 
+            if  root1.key == root2.key: 
+                return (isMirror(root1.left, root2.right)and
+                isMirror(root1.right, root2.left)) 
+    return False
