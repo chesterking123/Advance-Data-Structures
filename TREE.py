@@ -167,7 +167,7 @@ def iterativePreorder(root):
         if node.left is not None: 
             nodeStack.append(node.left)
             
-def mirror(root):
+def mirror_a_tree(root): #invert a tree
     # Code here
     if (root == None): 
         return
@@ -184,27 +184,51 @@ def Checkif2treeMirror(a, b):
     return (a.data == b.data and areMirror(a.left, b.right) and areMirror(a.right , b.left)) 
 
 def isSymmetric( root) : #if a tree is a mirror of itself 
-    q = []      
-    q.append(root)  
-    q.append(root)   
-    leftNode = 0
-    rightNode = 0
-    while(not len(q)):  
-        leftNode = q[0]  
-        q.pop(0)  
-        rightNode = q[0]  
-        q.pop(0)   
-        if(leftNode.data != rightNode.data): 
-            return False
-        if(leftNode.left and rightNode.right) : 
-            q.append(leftNode.left)  
-            q.append(rightNode.right)  .  
-        elif (leftNode.left or rightNode.right) : 
-            return False
-        if(leftNode.right and rightNode.left):  
-            q.append(leftNode.right)  
-            q.append(rightNode.left)  
-        elif(leftNode.right or rightNode.left): 
-            return False
-      
-    return True
+q = []      
+q.append(root)  
+q.append(root)   
+leftNode = 0
+rightNode = 0
+while(not len(q)):  
+    leftNode = q[0]  
+    q.pop(0)  
+    rightNode = q[0]  
+    q.pop(0)   
+    if(leftNode.data != rightNode.data): 
+        return False
+    if(leftNode.left and rightNode.right) : 
+        q.append(leftNode.left)  
+        q.append(rightNode.right)  .  
+    elif (leftNode.left or rightNode.right) : 
+        return False
+    if(leftNode.right and rightNode.left):  
+        q.append(leftNode.right)  
+        q.append(rightNode.left)  
+    elif(leftNode.right or rightNode.left): 
+        return False
+
+return True
+
+
+def isCousins(self, root: TreeNode, x: int, y: int) -> bool:
+    lvl=0
+    check=[]
+    node=root
+    def check_cousin(root,lvl,check,node):
+        #print(a,c,root)
+        if len(check)==4 or root==None:
+            return
+        if root.val==x:
+            check.append(lvl)
+            check.append(node.val)
+        if root.val==y:
+            check.append(lvl)
+            check.append(node.val)
+        lvl+=1
+        m=root
+        check_cousin(root.left,lvl,check,node)
+        check_cousin(root.right,lvl,check,node)
+    check_cousin(root,lvl,check,node)
+    print(check)
+    if check[0]==check[2] and check[1]!=check[3]:
+        return True
