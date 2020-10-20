@@ -234,27 +234,37 @@ def isCousins(self, root: TreeNode, x: int, y: int) -> bool:
         return True
 
    
-
+###COMMON ANSESTOR PROGRAm
 def findLCA(root, n1, n2): 
     if root is None: 
         return None
-  
     # If either n1 or n2 matches with root's key, report 
     #  the presence by returning root (Note that if a key is 
     #  ancestor of other, then the ancestor key becomes LCA 
     if root.data == n1 or root.data == n2: 
         return root  
-  
     # Look for keys in left and right subtrees 
     left_lca = findLCA(root.left, n1, n2)  
     right_lca = findLCA(root.right, n1, n2) 
-  
     # If both of the above calls return Non-NULL, then one key 
     # is present in once subtree and other is present in other, 
     # So this node is the LCA 
     if left_lca and right_lca: 
         return root  
-  
     # Otherwise check if left subtree or right subtree is LCA 
-    return left_lca if left_lca is not None else right_lca 
+    if left_lca is not None:
+        return left_lca
+    else:
+        return right_lca
   
+
+def printkDistanceNodeDown(root, k): 
+    if root is None or k< 0 : 
+        return 
+    # If we reach a k distant node, print it 
+    if k == 0 : 
+        print root.data  
+        return 
+    # Recur for left and right subtee 
+    printkDistanceNodeDown(root.left, k-1) 
+    printkDistanceNodeDown(root.right, k-1) 
